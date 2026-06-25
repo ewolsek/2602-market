@@ -1,14 +1,14 @@
 import db from "#db/client";
 
-export async function createProduct(name, price, description) {
+export async function createProduct(title, price, description) {
     const sql = `
-    INSERT INTO products (name, price, description)
+    INSERT INTO products (title, price, description)
     VALUES ($1, $2, $3)
     RETURNING *;
     `;
     const {
         rows: [product],
-    } = await db.query(sql, [name, price, description]);
+    } = await db.query(sql, [title, price, description]);
     return product;
 }
 

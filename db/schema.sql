@@ -12,20 +12,20 @@ CREATE TABLE users (
 CREATE TABLE products (
     id serial PRIMARY KEY,
     title text NOT NULL,
-    description text NOT NULL,
-    price integer NOT NULL
+    description text NULL,
+    price decimal NOT NULL
 );
 
 CREATE TABLE orders (
     id serial PRIMARY KEY,
     date date NOT NULL,
-    note text NOT NULL,
+    note text NULL,
     user_id integer NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE orders_products (
+    order_id integer NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    product_id integer NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    quantity integer NOT NULL DEFAULT 1,
     PRIMARY KEY (order_id, product_id)
-    order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE
-    product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE
-    quantity integer NOT NULL
 );

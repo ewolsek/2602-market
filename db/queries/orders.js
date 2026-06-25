@@ -1,6 +1,6 @@
 import db from "#db/client";
 
-export async function createOrder(date, notes, userId) {
+export async function createOrder(date, note, userId) {
     const sql = `
     INSERT INTO orders (date, notes, user_id)
     VALUES ($1, $2, $3)
@@ -8,7 +8,7 @@ export async function createOrder(date, notes, userId) {
     `;
     const {
         rows: [order],
-    } = await db.query(sql, [date, notes, userId]);
+    } = await db.query(sql, [date, note, userId]);
     return order;
 }
 
@@ -38,8 +38,8 @@ export async function getOrdersByProductId(id) {
     const sql = `
     SELECT orders.*
     FROM orders
-    JOIN order_products ON orders.id = order_products.order_id
-    WHERE order_products.product_id = $1;
+    JOIN orders_products ON orders.id = orders_products.order_id
+    WHERE orders_products.product_id = $1;
     `;
     const { rows: orders } = await db.query(sql, [id]);
     return orders;

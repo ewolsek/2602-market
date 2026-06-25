@@ -2,12 +2,12 @@ import db from "#db/client";
 
 export async function createOrderProduct(orderId, productId, quantity) {
     const sql = `
-    INSERT INTO order_products (order_id, product_id, quantity)
+    INSERT INTO orders_products (order_id, product_id, quantity)
     VALUES ($1, $2, $3)
     RETURNING *;
     `;
     const {
-        rows: [orderProduct],
+        rows: [ordersProduct],
     } = await db.query(sql, [orderId, productId, quantity]);
-    return orderProduct;
+    return ordersProduct;
 }

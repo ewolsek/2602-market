@@ -10,12 +10,12 @@ await db.end();
 console.log("🌱 Database seeded.");
 
 async function seed() {
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 10; i++) {
     await createProduct("Product" + i, i * 10.00);
   }
   const user = await createUser("user", "password");
-  const order = await createOrder("Order 1", user.id);
-  for (let j = 1; j <= 5; j++) {
-    await createOrderProduct(order.id, j); 
+  const order = await createOrder("2001-01-01", user.id);
+  for (let i=0; productId < 5; i++) {
+    await createOrderProduct(order.id, productId); 
   }
 }
